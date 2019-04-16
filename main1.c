@@ -60,21 +60,104 @@ for(int i=0;i<5;i++)
     }
 }
 fclose(fp);
-fp =fopen("SPECIAL_CASES_WITH_RANDOM.txt","w") ;
+printf("_________________LS____________\n");
+fp =fopen("LARGE_AND_SMALL.txt","w") ;
 srand(RAND_MAX);
-for(int i=0;i<5;i++)
+for(int i=0;i<100;i++)
 {
 
     for(int j=0;j<100;j++)
     {
+        float f1 ;
+        float f2;
+        float f3;
         f_i random ;
-        random.binary_decimal=(unsigned int)((rand() & 0x7fff) | ((rand() & 0x7fff) << 15))%0x7FFFFF;
+        random.ieee_754=((float)(RAND_MAX)/(float)(rand()))*1000000000;
+        //random.binary_decimal+=rand()%0x31000000;
+        f1= random.ieee_754;
+
+        //f1=f1/((float)(RAND_MAX)/(float)(rand()));
         Float_binary(c,random.ieee_754);
-        printf("_%x %f  %x_\n",random.binary_decimal,random.ieee_754,RAND_MAX);
+        printf(" %f ++",f1);
         fputs(c,fp);
-        Float_binary(c,special[i].ieee_754);
+        f2=random.ieee_754=(float)(RAND_MAX)/(float)(rand());
+        Float_binary(c,f1);
+        printf("%f == ",f2);
+
         fputs(c,fp);
-        Float_binary(c,special[i].ieee_754+random.ieee_754);
+        f3=f2+f1;
+        Float_binary(c,f3);
+        printf("%f\n",(f3));
+
+        fputs(c,fp);
+        fputs("\n",fp);
+    }
+}
+printf("_________LL______________\n");
+fclose(fp);
+fp =fopen("LARGE_AND_LARGE.txt","w") ;
+srand(RAND_MAX);
+for(int i=0;i<100;i++)
+{
+
+    for(int j=0;j<100;j++)
+    {
+        float f1 ;
+        float f2;
+        float f3;
+        f_i random ;
+        random.ieee_754=((float)(RAND_MAX)/(float)(rand()%10))*RAND_MAX*5*5*5;
+        //random.binary_decimal+=rand()%0x31000000;
+        f1= random.ieee_754;
+
+        f1=f1/((float)(RAND_MAX)/(float)(rand()));
+        Float_binary(c,random.ieee_754);
+        printf(" %f ++",f1);
+        fputs(c,fp);
+        f2=random.ieee_754=(float)(RAND_MAX)/(float)(rand()%10)*100000000000;
+        Float_binary(c,f1);
+        printf("%f == ",f2);
+
+        fputs(c,fp);
+        f3=f2+f1;
+        Float_binary(c,f3);
+        printf("%f\n",(f3));
+
+        fputs(c,fp);
+        fputs("\n",fp);
+    }
+}
+fclose(fp);
+
+printf("_______________LS_________________");
+fp =fopen("SMALL_AND_LARGE.txt","w") ;
+srand(RAND_MAX);
+for(int i=0;i<100;i++)
+{
+
+    for(int j=0;j<100;j++)
+    {
+        float f1 ;
+        float f2;
+        float f3;
+        f_i random ;
+        random.ieee_754=((float)(RAND_MAX)/(float)(rand()));
+        //random.binary_decimal+=rand()%0x31000000;
+        f1= random.ieee_754;
+
+        //f1=f1/((float)(RAND_MAX)/(float)(rand()));
+        Float_binary(c,random.ieee_754);
+        printf(" %f ++",f1);
+        fputs(c,fp);
+        f2=random.ieee_754=(float)(RAND_MAX)/(float)(rand())*100;
+        Float_binary(c,f1);
+        printf("%f == ",f2);
+
+        fputs(c,fp);
+        f3=f2+f1;
+        Float_binary(c,f3);
+        printf("%f\n",(f3));
+
         fputs(c,fp);
         fputs("\n",fp);
     }
